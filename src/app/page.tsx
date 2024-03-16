@@ -1,5 +1,6 @@
-import Header from "../../components/header";
-import { HeroParallax } from "../../components/ui/hero-parallax";
+import About from "@/components/cards/page";
+import Header from "../components/header";
+import { HeroParallax } from "../components/ui/hero-parallax";
 
 export const products = [
   {
@@ -102,6 +103,7 @@ export default function Home() {
     <div className="min-h-screen p-10 bg-[#101010]">
       <Header />
       <HeroParallax products={products} />
+      <About />
     </div>
   );
 }
