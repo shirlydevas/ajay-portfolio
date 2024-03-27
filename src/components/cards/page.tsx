@@ -5,6 +5,9 @@ import { cn } from "../../../lib/utils"
 import { Introduction } from "./introduction"
 import { Imagery } from "./imagery"
 import { Experience } from "./experience"
+import { Education } from "./education"
+import { Background } from "./background"
+import { ToolStack } from "./tool-stack"
 
 export const metadata: Metadata = {
   title: "Cards",
@@ -29,42 +32,41 @@ function DemoContainer({
 export default function About() {
   return (
     <>
-        <h3 className="text-4xl font-bold text-white my-10">About me</h3>
-
+      <h3 className="text-4xl font-bold text-white my-10">About me</h3>
       <div className="hidden items-start justify-center gap-6 rounded-lg py-8 md:grid lg:grid-cols-2 xl:grid-cols-3">
         <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
           <DemoContainer>
             <Introduction />
           </DemoContainer>
-          {/* <DemoContainer>
-            <Imagery />
-          </DemoContainer>  */}
+          <DemoContainer>
+            <Background />
+          </DemoContainer>
         </div>
-         <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
-         <DemoContainer>
+        <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
+          <DemoContainer>
             <Imagery />
-          </DemoContainer> 
-          {/* <DemoContainer>
-            <DemoShareDocument />
           </DemoContainer>
           <DemoContainer>
+            <Education />
+          </DemoContainer>
+          {/* <DemoContainer>
             <DemoDatePicker />
           </DemoContainer>
           <DemoContainer>
             <DemoNotifications />
-          </DemoContainer> */}
+          </DemoContainer>  */}
         </div>
         <div className="col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
           <DemoContainer>
             <Experience />
           </DemoContainer>
-          {/* <DemoContainer>
-            <DemoGithub />
-          </DemoContainer>
           <DemoContainer>
+            <ToolStack />
+          </DemoContainer>
+          {/*<DemoContainer>
             <DemoCookieSettings />
           </DemoContainer> */}
-        </div> 
+        </div>
       </div>
     </>
   )

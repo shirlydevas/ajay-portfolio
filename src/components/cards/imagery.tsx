@@ -13,7 +13,7 @@ import Avatar from "@/assets/avatar.jpg"
 
 export function Imagery() {
   return (
-    <Card>
+    <Card className="about-card">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Create an account</CardTitle>
       </CardHeader>

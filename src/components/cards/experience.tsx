@@ -1,6 +1,3 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons"
-
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -10,25 +7,46 @@ import {
 } from "@/components/ui/card"
 
 export function Experience() {
+
+  const experienceData = [
+    {
+      id: 1,
+      year: "2019-2020",
+      name: "Sofia Davis",
+      email: "",
+    },
+    {
+      id: 2,
+      year: "2019-2020",
+      name: "Sofia Davis",
+      email: "",
+    },
+    {
+      id: 3,
+      year: "2019-2020",
+      name: "Sofia Davis",
+      email: "",
+    },
+  ]
   return (
-    <Card>
+    <Card className="about-card">
       <CardHeader>
-        <CardTitle>Team Members</CardTitle>
-        <CardDescription>
-          Invite your team members to collaborate.
-        </CardDescription>
+        <CardTitle>Experience</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <div className="flex items-center justify-between space-x-4">
-          <div className="flex items-center space-x-4">
-            <div>
-                <span>2019-2020</span>
+        <div className="flex justify-between flex-col">
+          {experienceData.map((data) => (
+
+            <div className="flex items-center space-x-10 mb-5" key={data.id}>
+              <div>
+                <span>{data.year}</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium leading-none">{data.name}</p>
+                <p className="text-sm text-muted-foreground">m@example.com</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
-            </div>
-          </div>
+          ))}
         </div>
       </CardContent>
     </Card>

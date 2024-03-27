@@ -26,6 +26,20 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.about-card {
+  @apply text-white bg-[#171717] border-[#232323]
+}
+
+.stack-style {
+  &:hover {
+    box-shadow: 0 0 40px #01FFF4;
+  }
+}
+
+.carousel-btn {
+  @apply w-[40px] h-[40px] absolute p-2 border-none rounded-[50%] z-10 cursor-pointer bg-white text-[18px]
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

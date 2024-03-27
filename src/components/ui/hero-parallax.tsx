@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   motion,
   useScroll,
@@ -9,16 +9,115 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectPopup from "../project-popup";
 
-export const HeroParallax = ({
-  products,
-}: {
-  products: {
-    title: string;
-    link: string;
-    thumbnail: string;
-  }[];
-}) => {
+export const products = [
+  {
+    title: "Moonbeam",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
+  },
+  {
+    title: "Cursor",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
+  },
+  {
+    title: "Rogue",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/rogue.png",
+  },
+
+  {
+    title: "Editorially",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/editorially.png",
+  },
+  {
+    title: "Editrix AI",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/editrix.png",
+  },
+  {
+    title: "Pixel Perfect",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
+  },
+
+  {
+    title: "Algochurn",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
+  },
+  {
+    title: "Aceternity UI",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
+  },
+  {
+    title: "Tailwind Master Kit",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
+  },
+  {
+    title: "SmartBridge",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
+  },
+  {
+    title: "Renderwork Studio",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
+  },
+
+  {
+    title: "Creme Digital",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/cremedigital.png",
+  },
+  {
+    title: "Golden Bells Academy",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png",
+  },
+  {
+    title: "Invoker Labs",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+  },
+  {
+    title: "E Free Invoice",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
+  },
+];
+
+
+export const HeroParallax = () => {
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const openProjectPopup = (product: any) => {
+    setSelectedProduct(product);
+  };
+
+  const closeProjectPopup = () => {
+    setSelectedProduct(null);
+  };
+
+  useEffect(() => {
+    // Add overflow-hidden class to body element
+    if (selectedProduct) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [selectedProduct]);
+
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
   const thirdRow = products.slice(10, 15);
@@ -54,12 +153,14 @@ export const HeroParallax = ({
     useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
     springConfig
   );
+
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Banner />
+      {selectedProduct && <ProjectPopup closeProjectPopup={closeProjectPopup} />}
       <motion.div
         style={{
           rotateX,
@@ -76,6 +177,7 @@ export const HeroParallax = ({
               product={product}
               translate={translateX}
               key={product.title}
+              openProjectPopup={openProjectPopup}
             />
           ))}
         </motion.div>
@@ -85,6 +187,7 @@ export const HeroParallax = ({
               product={product}
               translate={translateXReverse}
               key={product.title}
+              openProjectPopup={openProjectPopup}
             />
           ))}
         </motion.div>
@@ -94,6 +197,7 @@ export const HeroParallax = ({
               product={product}
               translate={translateX}
               key={product.title}
+              openProjectPopup={openProjectPopup}
             />
           ))}
         </motion.div>
@@ -120,13 +224,14 @@ export const Banner = () => {
 export const ProductCard = ({
   product,
   translate,
+  openProjectPopup,
 }: {
   product: {
     title: string;
-    link: string;
     thumbnail: string;
   };
   translate: MotionValue<number>;
+  openProjectPopup: (product: any) => void;
 }) => {
   return (
     <motion.div
@@ -139,9 +244,9 @@ export const ProductCard = ({
       key={product.title}
       className="group/product h-96 w-[30rem] relative flex-shrink-0"
     >
-      <Link
-        href={product.link}
+      <div
         className="block group-hover/product:shadow-2xl "
+        onClick={() => openProjectPopup(product)}
       >
         <Image
           src={product.thumbnail}
@@ -150,7 +255,7 @@ export const ProductCard = ({
           className="object-cover object-left-top absolute h-full w-full inset-0"
           alt={product.title}
         />
-      </Link>
+      </div>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
       <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
         {product.title}
